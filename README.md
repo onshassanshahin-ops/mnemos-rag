@@ -147,7 +147,7 @@ Settings are stored in `server/data/settings.json`. You can also change them via
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `provider` | `gemini` | `gemini` or `ollama` |
-| `gemini.chat_model` | `gemini-2.5-flash` | Gemini chat model |
+| `gemini.chat_model` | `gemini-3.6-flash` | Gemini chat model |
 | `gemini.embed_model` | `gemini-embedding-001` | Gemini embedding model (768-dim) |
 | `ollama.base_url` | `http://localhost:11434` | Ollama server URL |
 | `ollama.chat_model` | `llama3.1` | Ollama chat model |

@@ -12,18 +12,24 @@ SETTINGS_FILE = DATA_DIR / "settings.json"
 load_dotenv(BASE_DIR / ".env")
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+DEFAULT_PROVIDER = os.getenv("MNEMOS_PROVIDER", "gemini").strip().lower() or "gemini"
+DEFAULT_OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434").strip() or "http://localhost:11434"
+DEFAULT_OLLAMA_CHAT_MODEL = os.getenv("OLLAMA_CHAT_MODEL", "llama3.1").strip() or "llama3.1"
+DEFAULT_OLLAMA_EMBED_MODEL = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text").strip() or "nomic-embed-text"
+DEFAULT_GEMINI_CHAT_MODEL = os.getenv("GEMINI_CHAT_MODEL", "gemini-3.6-flash").strip() or "gemini-3.6-flash"
+DEFAULT_GEMINI_EMBED_MODEL = os.getenv("GEMINI_EMBED_MODEL", "gemini-embedding-001").strip() or "gemini-embedding-001"
 
 DEFAULT_SETTINGS = {
-    "provider": "gemini",
+    "provider": DEFAULT_PROVIDER,
     "gemini": {
-        "chat_model": "gemini-2.5-flash",
-        "embed_model": "gemini-embedding-001",
+        "chat_model": DEFAULT_GEMINI_CHAT_MODEL,
+        "embed_model": DEFAULT_GEMINI_EMBED_MODEL,
         "embed_dim": 768,
     },
     "ollama": {
-        "base_url": "http://localhost:11434",
-        "chat_model": "llama3.1",
-        "embed_model": "nomic-embed-text",
+        "base_url": DEFAULT_OLLAMA_BASE_URL,
+        "chat_model": DEFAULT_OLLAMA_CHAT_MODEL,
+        "embed_model": DEFAULT_OLLAMA_EMBED_MODEL,
     },
     "retrieval": {"top_k": 6},
     "voice": {"tts_enabled": True, "tts_voice": "Kore"},
@@ -41,6 +47,32 @@ class Settings:
                 self._deep_merge(self._data, stored)
             except Exception:
                 pass
+        self._apply_env_overrides()
+
+    def _apply_env_overrides(self):
+        provider = os.getenv("MNEMOS_PROVIDER", "").strip().lower()
+        if provider:
+            self._data["provider"] = provider
+
+        base_url = os.getenv("OLLAMA_BASE_URL", "").strip()
+        if base_url:
+            self._data.setdefault("ollama", {})["base_url"] = base_url
+
+        chat_model = os.getenv("OLLAMA_CHAT_MODEL", "").strip()
+        if chat_model:
+            self._data.setdefault("ollama", {})["chat_model"] = chat_model
+
+        embed_model = os.getenv("OLLAMA_EMBED_MODEL", "").strip()
+        if embed_model:
+            self._data.setdefault("ollama", {})["embed_model"] = embed_model
+
+        gemini_chat = os.getenv("GEMINI_CHAT_MODEL", "").strip()
+        if gemini_chat:
+            self._data.setdefault("gemini", {})["chat_model"] = gemini_chat
+
+        gemini_embed = os.getenv("GEMINI_EMBED_MODEL", "").strip()
+        if gemini_embed:
+            self._data.setdefault("gemini", {})["embed_model"] = gemini_embed
 
     @staticmethod
     def _deep_merge(base: dict, override: dict):
