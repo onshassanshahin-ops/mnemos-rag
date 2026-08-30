@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #f6f4ef;
+  --color-surface-2: #eeece5;
+  --color-surface-3: #e4e1d8;
+  --color-border: #d8d5cc;
+  --color-border-bright: #c8c4b9;
+  --color-accent: #0f766e;
+  --color-accent-dim: #115e59;
+  --color-accent-glow: #0f766e18;
+  --color-cyan: #0f766e;
+  --color-green: #2f855a;
+  --color-amber: #b7791f;
+  --color-red: #c2413b;
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff15 transparent;
+  }
+  body {
+    margin: 0;
+    background: #f6f4ef;
+    color: #27313a;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  }
+  h1, h2 {
+    font-family: Georgia, "Times New Roman", serif;
+  }
+}
+
+@layer components {
+  .glass {
+    background: #fffefa;
+    border: 1px solid #dedbd2;
+    box-shadow: 0 1px 2px #27313a0a;
+  }
+
+  .glass-bright {
+    background: #faf9f5;
+    border: 1px solid #d8d5cc;
+    box-shadow: 0 1px 2px #27313a08;
+  }
+
+  .gradient-text {
+    color: #27313a;
+  }
+
+  .glow-ring {
+    box-shadow: 0 2px 8px #27313a12;
+  }
+
+  .citation-chip {
+    @apply inline-flex items-center justify-center rounded-md px-1.5 py-0.5 text-xs font-semibold
+           bg-teal-50 text-teal-700 border border-teal-200
+           hover:bg-teal-100 hover:border-teal-300 cursor-pointer transition-all;
+  }
+
+  .score-bar {
+    @apply h-1 rounded-full bg-teal-600;
+  }
+}
+
+.text-white\/90 { color: #27313a; }
+.text-white\/80 { color: #3f4b54; }
+.text-white\/70 { color: #53616a; }
+.text-white\/60, .text-white\/50, .text-white\/40 { color: #718087; }
+.text-white\/30, .text-white\/25, .text-white\/20 { color: #929b9e; }
+.bg-white\/3 { background: #f1efe9; }
+.bg-white\/6, .bg-white\/\[0\.08\], .bg-white\/\[0\.10\] { background: #e9e7df; }
+.border-white\/4, .border-white\/6, .border-white\/\[0\.10\], .border-white\/\[0\.12\] { border-color: #dedbd2; }
+.bg-linear-to-br { background: #0f766e; }
+.bg-linear-to-r { background: #c2413b; }
+.shadow-indigo-500\/20, .shadow-indigo-500\/30 { box-shadow: 0 2px 8px #27313a18; }
+.text-indigo-300, .text-indigo-400 { color: #0f766e; }
+.bg-indigo-500\/10, .bg-indigo-500\/15, .bg-indigo-500\/20 { background: #d9eeeb; }
+.border-indigo-500\/20, .border-indigo-500\/30 { border-color: #abd8d2; }
+.bg-indigo-500 { background: #0f766e; }
+.hover\:bg-indigo-400:hover { background: #115e59; }
+.hover\:bg-indigo-500\/25:hover, .hover\:bg-indigo-500\/30:hover { background: #c6e5e1; }
+.focus\:border-indigo-500\/40:focus { border-color: #65aaa2; }

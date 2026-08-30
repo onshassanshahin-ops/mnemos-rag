@@ -1,0 +1,11 @@
+.venv/
+server/data/
+server/__pycache__/
+server/app/__pycache__/
+*.pyc
+.env
+node_modules/
+ui/dist/
+.DS_Store
+Thumbs.db
+*.egg-info/
